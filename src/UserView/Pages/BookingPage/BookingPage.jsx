@@ -74,5 +74,5 @@ export default function BookingPage() {
     );
   };
 
-  return <div>{renderTheatreChains()}</div>;
+  return <div className="container mx-auto">{renderTheatreChains()}</div>;
 }

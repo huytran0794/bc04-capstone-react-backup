@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import { movieServ } from "../../../services/movieServ";
 import { numberWithCommas } from "../../../utils/utils";
 import {
   setSelectedMovieInfo,
@@ -70,9 +71,7 @@ export default function BookingConfirmation() {
             <button
               type="button"
               className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-              onClick={() => {
-                setIsBookingSuccessOpen(true);
-              }}
+              onClick={handleXacNhanDatVe}
             >
               Đặt vé
             </button>
@@ -89,6 +88,22 @@ export default function BookingConfirmation() {
     dispatch(setSelectedSeatList([]));
     dispatch(setSelectedMovieInfo(null));
     navigate("/");
+  };
+
+  let handleXacNhanDatVe = () => {
+    let ticketsInfo = {
+      maLichChieu: selectedMovieInfo.maLichChieu,
+      danhSachVe: selectedSeatList,
+    };
+    movieServ
+      .postBookingTicket(ticketsInfo)
+      .then((res) => {
+        console.log(res);
+        setIsBookingSuccessOpen(true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   return (
     <div className="container mx-auto">

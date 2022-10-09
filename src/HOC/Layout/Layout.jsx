@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../../UserView/Components/HeaderTheme/Header";
 import { webColor } from "../../UserView/constants/colorConstant";
+import NotifyModal from "../NotifyModal";
 
 export default function Layout({ Component }) {
   return (

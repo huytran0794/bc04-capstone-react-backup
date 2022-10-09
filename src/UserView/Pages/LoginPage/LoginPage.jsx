@@ -21,8 +21,7 @@ const LoginPage = () => {
         // console.log(res);
         dispatch(setUserInfo(res.data.content));
         localServ.user.set(res.data.content);
-        // window.location.href = "/";
-        navigate("/");
+        window.location.href = "/";
       })
       .catch((err) => {
         console.log(err);

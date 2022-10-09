@@ -21,4 +21,8 @@ export const movieServ = {
     let uri = `/api/QuanLyDatVe/LayDanhSachPhongVe?MaLichChieu=${maLichChieu}`;
     return https.get(uri);
   },
+  postBookingTicket: (ticketsInfo) => {
+    let uri = `/api/QuanLyDatVe/DatVe`;
+    return https.post(uri, ticketsInfo);
+  },
 };
