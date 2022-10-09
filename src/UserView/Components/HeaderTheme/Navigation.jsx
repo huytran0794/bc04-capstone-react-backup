@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 const items = [
   {
     label: (
-      <NavLink to="/">
+      <NavLink to="/theatres">
         <span>Our Theatres</span>
       </NavLink>
     ),

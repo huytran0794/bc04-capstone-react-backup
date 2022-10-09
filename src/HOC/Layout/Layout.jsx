@@ -1,6 +1,6 @@
 import React from "react";
-import Header from "../Components/HeaderTheme/Header";
-import { webColor } from "../constants/colorConstant";
+import Header from "../../UserView/Components/HeaderTheme/Header";
+import { webColor } from "../../UserView/constants/colorConstant";
 
 export default function Layout({ Component }) {
   return (

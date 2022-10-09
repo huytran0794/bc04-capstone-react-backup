@@ -18,7 +18,7 @@ export default function HomePage() {
       });
   }, []);
   return (
-    <div>
+    <div className="max-w-screen-xl mx-auto">
       <MoviesBanner />
       <MoviesList moviesList={movies} />
     </div>

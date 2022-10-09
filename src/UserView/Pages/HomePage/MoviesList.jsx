@@ -1,6 +1,9 @@
 import React from "react";
 import { Card } from "antd";
 import { webColor } from "../../constants/colorConstant";
+import moment from "moment";
+import { hideLongString } from "../../../utils/utils";
+import { NavLink } from "react-router-dom";
 
 export default function MoviesList({ moviesList }) {
   let renderMovieItem = (movie) => (
@@ -22,11 +25,15 @@ export default function MoviesList({ moviesList }) {
         }
       >
         <p>{movie.tenPhim}</p>
-        <p className="truncate">{movie.moTa}</p>
-        <p>{movie.ngayKhoiChieu}</p>
-        <div>
-          <button>Get Tickets</button>
-          <button>Details</button>
+        <p className="text-justify">{hideLongString(movie.moTa, 70)}</p>
+        <p>Released {moment(movie.ngayKhoiChieu).format("MMM Do, YYYY")}</p>
+        <div className="flex justify-between">
+          <NavLink to={`/detail/${movie.maPhim}`}>
+            <button>Details</button>
+          </NavLink>
+          <NavLink to={`/booking/${movie.maPhim}`}>
+            <button>Get Tickets</button>
+          </NavLink>
         </div>
       </Card>
     </>
