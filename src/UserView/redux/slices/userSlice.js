@@ -1,8 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { localServ } from "../../../services/localServ";
+
+let user = localServ.user.get() ? localServ.user.get() : null;
 
 const initialState = {
   isLogin: false,
-  user: null,
+  user,
 };
 
 const userSlice = createSlice({
@@ -12,11 +15,14 @@ const userSlice = createSlice({
     setUserInfo: (state, action) => {
       state.user = action.payload;
     },
+    removeUserInfo: (state) => {
+      state.user = null;
+    },
   },
 });
 
 // console.log(userSlice);
 
-export const { setUserInfo } = userSlice.actions;
+export const { setUserInfo, removeUserInfo } = userSlice.actions;
 
 export default userSlice.reducer;

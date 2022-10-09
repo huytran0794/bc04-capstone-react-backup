@@ -106,7 +106,6 @@ export default function BookingConfirmation() {
           <p>{selectedMovieInfo?.tenCumRap}</p>
           <p>{selectedMovieInfo?.tenRap}</p>
           <p>Ghế: {bookingUtils.renderSelectedSeat(selectedSeatList)}</p>
-          <p>Tổng cộng: {getTotalPrice()}</p>
         </div>
       </div>
       <div>

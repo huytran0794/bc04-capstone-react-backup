@@ -9,6 +9,7 @@ import TheatresListPage from "./UserView/Pages/TheatresListPage/TheatresListPage
 import BookingPage from "./UserView/Pages/BookingPage/BookingPage";
 import SelectSeat from "./UserView/Pages/BookingPage/SelectSeat/SelectSeat";
 import BookingConfirmation from "./UserView/Pages/BookingPage/BookingConfirmation";
+import SecureView from "./HOC/SecureView";
 
 function App() {
   return (
@@ -30,11 +31,19 @@ function App() {
         />
         <Route
           path="/selectseat/:maLichChieu"
-          element={<Layout Component={SelectSeat} />}
+          element={
+            <SecureView>
+              <Layout Component={SelectSeat} />
+            </SecureView>
+          }
         />
         <Route
           path="/booking-confirm/:maLichChieu"
-          element={<Layout Component={BookingConfirmation} />}
+          element={
+            <SecureView>
+              <Layout Component={BookingConfirmation} />
+            </SecureView>
+          }
         />
       </Routes>
     </BrowserRouter>
