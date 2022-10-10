@@ -20,20 +20,65 @@ export default function DetailMovie() {
         console.log(err);
       });
   }, []);
+
+  let getYouTubeLink = (shortenLink) => {
+    console.log(shortenLink);
+    let youTubeIndex = shortenLink.indexOf("youtube.com/embed");
+    if (youTubeIndex !== -1) {
+      return shortenLink;
+    }
+    youTubeIndex = shortenLink.indexOf("youtu.be");
+    return `https://www.youtube.com/embed/${shortenLink.slice(
+      youTubeIndex + 9
+    )}`;
+  };
+
   return (
-    <div>
-      <p>Trailer</p>
-      <p>{movieDetail?.tenPhim}</p>
-      <NavLink to={`/booking/${movieDetail?.maPhim}`}>
-        <button>Get Tickets</button>
-      </NavLink>
-      <div>
-        <div>
-          <p>Rating: {movieDetail?.danhGia}</p>
-          <p>{moment(movieDetail?.ngayKhoiChieu).format("MMM DD,YYYY")}</p>
-          {movieDetail?.hot ? <Tag color="#f50">HOT</Tag> : <></>}
+    <div className="container mx-auto">
+      <iframe
+        width="560"
+        height="315"
+        src={movieDetail ? getYouTubeLink(movieDetail.trailer) : null}
+        title="YouTube video player"
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      ></iframe>
+      <div className="movieShortDetails mb-5">
+        <div className="flex items-center">
+          <p className="mb-0 mr-2 font-bold text-2xl">{movieDetail?.tenPhim}</p>
+          {movieDetail?.hot ? (
+            <Tag color="#f50" className="font-bold">
+              HOT
+            </Tag>
+          ) : (
+            <></>
+          )}
         </div>
-        <div>{movieDetail?.moTa}</div>
+        <p>
+          Rating:{" "}
+          <span className="font-semibold text-lg text-red-500">
+            {movieDetail?.danhGia}
+          </span>
+          /10
+        </p>
+        <NavLink to={`/booking/${movieDetail?.maPhim}`}>
+          <button
+            type="button"
+            class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+          >
+            ĐẶT VÉ NGAY
+          </button>
+        </NavLink>
+      </div>
+      <div className="movieDesc flex">
+        <div className="w-1/4 flex-shrink-0">
+          <p className="mb-2 text-lg">Khởi chiếu:</p>
+          <p className="mb-2 font-bold text-xl">
+            {moment(movieDetail?.ngayKhoiChieu).format("MMM DD, YYYY")}
+          </p>
+        </div>
+        <p className="mb-2 text-xl">{movieDetail?.moTa}</p>
       </div>
     </div>
   );
