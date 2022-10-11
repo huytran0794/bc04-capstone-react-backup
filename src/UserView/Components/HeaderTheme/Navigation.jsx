@@ -1,56 +1,21 @@
-import { SettingOutlined } from "@ant-design/icons";
 import { Menu } from "antd";
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { webColor } from "../../constants/colorConstant";
 
 const items = [
   {
     label: (
       <NavLink to="/theatres">
-        <span>Our Theatres</span>
+        <span className="text-white">Our Theatres</span>
       </NavLink>
     ),
     key: "theatresList",
   },
   {
-    label: "Our Theatres",
-    key: "theatres",
-    icon: <SettingOutlined />,
-    children: [
-      {
-        type: "group",
-        label: "Item 1",
-        children: [
-          {
-            label: "Option 1",
-            key: "setting:1",
-          },
-          {
-            label: "Option 2",
-            key: "setting:2",
-          },
-        ],
-      },
-      {
-        type: "group",
-        label: "Item 2",
-        children: [
-          {
-            label: "Option 3",
-            key: "setting:3",
-          },
-          {
-            label: "Option 4",
-            key: "setting:4",
-          },
-        ],
-      },
-    ],
-  },
-  {
     label: (
       <NavLink to="/">
-        <span>Food & Drinks</span>
+        <span className="text-white">Food & Drinks</span>
       </NavLink>
     ),
     key: "foodDrink",
@@ -67,6 +32,12 @@ const Navigation = () => {
 
   return (
     <Menu
+      style={{
+        background: webColor.bgPrimary,
+        border: "none",
+        color: "#fff",
+        fontSize: "18px",
+      }}
       onClick={onClick}
       selectedKeys={[current]}
       mode="horizontal"

@@ -19,3 +19,27 @@ export const generalStyle = {
     zIndex: 2,
   },
 };
+
+export const movieStyle = {
+  bannerWrapper: {
+    position: "relative",
+    width: "100%",
+    height: "500px",
+  },
+  bannerImage: {
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+  },
+  bannerOverlay: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.6)",
+    transition: "all 0.5s",
+  },
+};

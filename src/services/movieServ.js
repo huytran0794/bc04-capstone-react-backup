@@ -5,6 +5,10 @@ export const movieServ = {
     let uri = `/api/QuanLyPhim/LayDanhSachPhim?maNhom=${maNhom}`;
     return https.get(uri);
   },
+  getMovieBanner: () => {
+    let uri = `/api/QuanLyPhim/LayDanhSachBanner`;
+    return https.get(uri);
+  },
   getMovieDetail: (maPhim) => {
     let uri = `/api/QuanLyPhim/LayThongTinPhim?MaPhim=${maPhim}`;
     return https.get(uri);

@@ -11,40 +11,65 @@ export default function MoviesList({ moviesList }) {
       <Card
         style={{
           width: "100%",
-          height: 600,
+          height: "520px",
           background: webColor.bgPrimary,
           color: "white",
         }}
+        bodyStyle={{
+          height: "220px",
+          padding: "0.8rem",
+        }}
         bordered={false}
         cover={
-          <img
-            alt={movie.biDanh}
-            src={movie.hinhAnh}
-            style={{ height: "400px", objectFit: "cover" }}
-          />
+          <NavLink to={`/detail/${movie.maPhim}`}>
+            <img
+              alt={movie.biDanh}
+              src={movie.hinhAnh}
+              style={{ width: "100%", height: "300px", objectFit: "cover" }}
+              className="hover:scale-105 transition duration-300"
+            />
+          </NavLink>
         }
       >
-        <p>{movie.tenPhim}</p>
-        <p className="text-justify">{hideLongString(movie.moTa, 70)}</p>
-        <p>Released {moment(movie.ngayKhoiChieu).format("MMM Do, YYYY")}</p>
-        <div className="flex justify-between">
-          <NavLink to={`/detail/${movie.maPhim}`}>
-            <button>Details</button>
-          </NavLink>
-          <NavLink to={`/booking/${movie.maPhim}`}>
-            <button>Get Tickets</button>
-          </NavLink>
+        <div className="h-full flex flex-col justify-between">
+          <div className="text-white/70">
+            <NavLink to={`/detail/${movie.maPhim}`}>
+              <p className="truncate mb-2 font-semibold text-lg text-white">
+                {movie.tenPhim}
+              </p>
+            </NavLink>
+            <p className="text-justify">{hideLongString(movie.moTa, 70)}</p>
+            <p className="font-semibold">
+              Khởi chiếu:{" "}
+              <span className="text-white">
+                {moment(movie.ngayKhoiChieu).format("DD [Tháng] MM, YYYY")}
+              </span>
+            </p>
+          </div>
+          <div>
+            <NavLink to={`/booking/${movie.maPhim}`}>
+              <button
+                type="button"
+                className="px-8 py-2.5 bg-red-600 hover:bg-red-700 rounded-3xl focus:ring-4 focus:outline-none focus:ring-red-900 font-medium text-xl text-white"
+              >
+                Đặt vé ngay
+              </button>
+            </NavLink>
+          </div>
         </div>
       </Card>
     </>
   );
   return (
-    <div className="grid grid-cols-5 gap-5">
-      {moviesList.map((movie, index) => (
-        <div key={movie.maPhim.toString() + index}>
-          {renderMovieItem(movie)}
-        </div>
-      ))}
+    <div className="my-10">
+      <h3 className="font-semibold text-white text-2xl">DANH SÁCH PHIM</h3>
+      <div className="grid grid-cols-5 gap-5">
+        {moviesList.map((movie, index) => (
+          <div key={movie.maPhim.toString() + index}>
+            {renderMovieItem(movie)}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

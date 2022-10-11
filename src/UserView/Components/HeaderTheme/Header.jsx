@@ -5,10 +5,10 @@ import UserNav from "./UserNav";
 
 export default function Header() {
   return (
-    <div className="container mx-auto flex justify-between items-center">
-      <div className="flex justify-between items-center">
+    <div className="container mx-auto py-3 flex justify-between items-center">
+      <div className="flex items-center">
         <NavLink to={"/"}>
-          <img src="./movieLogo.png" alt="web-logo" />
+          <img className="h-16" src="./movieLogo.png" alt="web-logo" />
         </NavLink>
         <Navigation />
       </div>

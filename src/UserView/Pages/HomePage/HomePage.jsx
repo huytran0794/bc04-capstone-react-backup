@@ -10,7 +10,7 @@ export default function HomePage() {
     movieServ
       .getMovieList()
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setMovies(res.data.content);
       })
       .catch((err) => {
@@ -18,9 +18,11 @@ export default function HomePage() {
       });
   }, []);
   return (
-    <div className="max-w-screen-xl mx-auto">
+    <>
       <MoviesBanner />
-      <MoviesList moviesList={movies} />
-    </div>
+      <div className="container mx-auto">
+        <MoviesList moviesList={movies} />
+      </div>
+    </>
   );
 }

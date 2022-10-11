@@ -34,53 +34,55 @@ export default function DetailMovie() {
   };
 
   return (
-    <div className="container mx-auto">
+    <>
       <iframe
-        width="560"
-        height="315"
+        width="100%"
+        height="500px"
         src={movieDetail ? getYouTubeLink(movieDetail.trailer) : null}
         title="YouTube video player"
         frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
       ></iframe>
-      <div className="movieShortDetails mb-5">
-        <div className="flex items-center">
-          <p className="mb-0 mr-2 font-bold text-2xl">{movieDetail?.tenPhim}</p>
-          {movieDetail?.hot ? (
-            <Tag color="#f50" className="font-bold">
-              HOT
-            </Tag>
-          ) : (
-            <></>
-          )}
-        </div>
-        <p>
-          Rating:{" "}
-          <span className="font-semibold text-lg text-red-500">
-            {movieDetail?.danhGia}
-          </span>
-          /10
-        </p>
-        <NavLink to={`/booking/${movieDetail?.maPhim}`}>
-          <button
-            type="button"
-            class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-          >
-            ĐẶT VÉ NGAY
-          </button>
-        </NavLink>
-      </div>
-      <div className="movieDesc flex">
-        <div className="w-1/4 flex-shrink-0">
+      <div className="container mx-auto my-8 flex">
+        <div className="movieShortDetails mb-5 w-1/4 flex-shrink-0">
+          <div className="flex items-center">
+            <p className="mb-0 mr-2 font-bold text-2xl">
+              {movieDetail?.tenPhim}
+            </p>
+            {movieDetail?.hot ? (
+              <Tag color="#f50" className="font-bold">
+                HOT
+              </Tag>
+            ) : (
+              <></>
+            )}
+          </div>
+          <p>
+            Rating:{" "}
+            <span className="font-semibold text-lg text-red-500">
+              {movieDetail?.danhGia}
+            </span>
+            /10
+          </p>
+          <NavLink to={`/booking/${movieDetail?.maPhim}`}>
+            <button
+              type="button"
+              className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-3 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+            >
+              ĐẶT VÉ NGAY
+            </button>
+          </NavLink>
           <p className="mb-2 text-lg">Khởi chiếu:</p>
           <p className="mb-2 font-bold text-xl">
             {moment(movieDetail?.ngayKhoiChieu).format("MMM DD, YYYY")}
           </p>
         </div>
-        <p className="mb-2 text-xl">{movieDetail?.moTa}</p>
+        <div>
+          <p className="mb-2 text-xl leading-loose">{movieDetail?.moTa}</p>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
