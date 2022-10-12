@@ -39,22 +39,26 @@ export default function SelectedDetailTickets({
         <table className="text-lg">
           <tbody>
             <tr>
-              <td className="align-top">Rạp</td>
-              <td className="pl-4 font-semibold">{scheduleInfo?.tenCumRap}</td>
+              <td className="pb-2 align-top">Rạp</td>
+              <td className="pl-4 pb-2 font-semibold">
+                {scheduleInfo?.tenCumRap}
+              </td>
             </tr>
             <tr>
-              <td>Suất chiếu</td>
-              <td className="pl-4 font-semibold">
+              <td className="pb-2">Suất chiếu</td>
+              <td className="pl-4 pb-2 font-semibold">
                 {scheduleInfo?.gioChieu}, {scheduleInfo?.ngayChieu}
               </td>
             </tr>
             <tr>
-              <td>Phòng chiếu</td>
-              <td className="pl-4 font-semibold">{scheduleInfo?.tenRap}</td>
+              <td className="pb-2">Phòng chiếu</td>
+              <td className="pl-4 pb-2 font-semibold align-top">
+                {scheduleInfo?.tenRap}
+              </td>
             </tr>
             <tr>
-              <td>Ghế</td>
-              <td className="pl-4 font-semibold">
+              <td className="pb-2">Ghế</td>
+              <td className="pl-4 pb-2 font-semibold">
                 {bookingUtils.renderSelectedSeat(selectedSeatList)}
               </td>
             </tr>

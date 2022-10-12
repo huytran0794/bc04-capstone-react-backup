@@ -34,7 +34,7 @@ export default function MoviesList({ moviesList }) {
         <div className="h-full flex flex-col justify-between">
           <div className="text-white/70">
             <NavLink to={`/detail/${movie.maPhim}`}>
-              <span className="truncate font-semibold text-lg text-white">
+              <span className="truncate block font-semibold text-lg text-white">
                 {movie.tenPhim}
               </span>
             </NavLink>

@@ -118,7 +118,7 @@ export default function SelectSeat() {
             </p>
             <p className="text-white/80">{scheduleInfo.diaChi}</p>
             <p className="mb-0 text-lg text-white/80">
-              Giờ chiếu:{" "}
+              Xuất chiếu:{" "}
               <span className="text-white font-semibold">
                 {scheduleInfo.gioChieu} {scheduleInfo.ngayChieu}
               </span>

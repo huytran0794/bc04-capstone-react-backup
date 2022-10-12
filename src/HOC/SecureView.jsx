@@ -1,17 +1,9 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React from "react";
 import { localServ } from "../services/localServ";
 import NotifyModal from "./NotifyModal";
 
 export default function SecureView({ children }) {
-  let [isNotifyModalOpen, setNotifyModalOpen] = useState(false);
-
-  useEffect(() => {
-    let localUser = localServ.user.get();
-    if (!localUser) {
-      setNotifyModalOpen(true);
-    }
-  }, []);
+  let localUser = localServ.user.get();
 
   let handleOKClick = () => {
     window.location.href = "/login";
@@ -21,16 +13,16 @@ export default function SecureView({ children }) {
     window.location.href = "/";
   };
 
+  if (localUser) {
+    return children;
+  }
   return (
-    <>
-      {children}
-      <NotifyModal
-        isNotifyModalOpen={isNotifyModalOpen}
-        handleOKClick={handleOKClick}
-        handleCancelClick={handleCancelClick}
-      >
-        Vui lòng đăng nhập để thực hiện tính năng này
-      </NotifyModal>
-    </>
+    <NotifyModal
+      isNotifyModalOpen={true}
+      handleOKClick={handleOKClick}
+      handleCancelClick={handleCancelClick}
+    >
+      Vui lòng đăng nhập để thực hiện tính năng này
+    </NotifyModal>
   );
 }
