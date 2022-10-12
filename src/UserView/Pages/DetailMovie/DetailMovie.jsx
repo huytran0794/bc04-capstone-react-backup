@@ -46,17 +46,17 @@ export default function DetailMovie() {
       ></iframe>
       <div className="container mx-auto my-8 flex">
         <div className="movieShortDetails mb-5 w-1/4 flex-shrink-0">
-          <div className="flex items-center">
+          <div>
             <p className="mb-0 mr-2 font-bold text-2xl">
-              {movieDetail?.tenPhim}
+              <span className="mr-2">{movieDetail?.tenPhim}</span>
+              {movieDetail?.hot ? (
+                <Tag color="#f50" className="font-bold align-top">
+                  HOT
+                </Tag>
+              ) : (
+                <></>
+              )}
             </p>
-            {movieDetail?.hot ? (
-              <Tag color="#f50" className="font-bold">
-                HOT
-              </Tag>
-            ) : (
-              <></>
-            )}
           </div>
           <p>
             Rating:{" "}
@@ -79,7 +79,9 @@ export default function DetailMovie() {
           </p>
         </div>
         <div>
-          <p className="mb-2 text-xl leading-loose">{movieDetail?.moTa}</p>
+          <p className="mb-2 text-xl leading-loose text-justify">
+            {movieDetail?.moTa}
+          </p>
         </div>
       </div>
     </>

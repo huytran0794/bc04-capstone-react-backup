@@ -1,4 +1,4 @@
-import { Tabs } from "antd";
+import { Tabs, Tag } from "antd";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
@@ -11,7 +11,7 @@ export default function BookingPage() {
     movieServ
       .getMovieShowtimes(params.maPhim)
       .then((res) => {
-        // console.log(res);
+        console.log(res);
         setBookingInfo(res.data.content);
       })
       .catch((err) => {
@@ -24,13 +24,14 @@ export default function BookingPage() {
   };
   const renderTheatreChains = () => (
     <Tabs
+      className="showtimeChains"
       defaultActiveKey="1"
       onChange={onChange}
       items={bookingInfo?.heThongRapChieu.map((heThongRap, index) => {
         return {
           label: (
             <img
-              className="w-16 h-16"
+              className="w-16 h-16 mb-2"
               src={heThongRap.logo}
               alt={heThongRap.maHeThongRap}
             />
@@ -44,6 +45,7 @@ export default function BookingPage() {
 
   const renderTheatreList = (cumRapChieu) => (
     <Tabs
+      className="showtimeTheatres"
       defaultActiveKey="1"
       onChange={onChange}
       items={cumRapChieu?.map((rapChieu, index) => {
@@ -80,6 +82,7 @@ export default function BookingPage() {
     let showtimeDatesList = getShowtimeDatesList(showtimeList);
     return (
       <Tabs
+        className="showtimeDates"
         defaultActiveKey="1"
         onChange={onChange}
         items={showtimeDatesList?.map((date, index) => {
@@ -89,11 +92,18 @@ export default function BookingPage() {
               moment(date).format("DDMMYYYY")
             );
           });
+          let showDay = moment(date).format("DD");
+          let showMonth = moment(date).format("MM");
+          let showYear = moment(date).format("YYYY");
           return {
             label: (
-              <span className="text-white">
-                {moment(date).format("DD/MM/YYYY")}
-              </span>
+              <div className="showdate p-2 mb-3 flex text-white">
+                <p className="mr-2 mb-0 text-4xl">{showDay}</p>
+                <div>
+                  <p className="mb-0 text-right">{showMonth}</p>
+                  <p className="mb-0 text-right">{showYear}</p>
+                </div>
+              </div>
             ),
             key: date.toString() + index,
             children: renderShowtimeList(showtimeByDate),
@@ -113,8 +123,8 @@ export default function BookingPage() {
             to={`/selectseat/${showtime.maLichChieu}`}
             key={showtime.maLichChieu.toString() + index}
           >
-            <button className="hover:text-blue-400 border border-white hover:border-blue-400 text-sm text-white text-center font-medium rounded-lg px-5 py-2.5 m-2">
-              {moment(showtime.ngayChieuGioChieu).format("hh:mm a")}
+            <button className="px-5 py-2.5 m-2 border rounded-lg border-white/50 hover:border-white font-medium text-sm text-center text-white/50 hover:text-white">
+              {moment(showtime.ngayChieuGioChieu).format("hh:mm A")}
               {/* 2019-01-01T10:10:00 */}
             </button>
           </NavLink>
@@ -123,5 +133,60 @@ export default function BookingPage() {
     );
   };
 
-  return <div className="container mx-auto">{renderTheatreChains()}</div>;
+  return (
+    <div className="container mx-auto">
+      <h2 className="pb-3 mb-6 border-b-2 text-3xl text-white">Đặt vé</h2>
+      {!bookingInfo ? null : (
+        <div className="movieDetails flex mb-5">
+          <div className="movieDetails__cover w-64 h-80 mr-6 flex-shrink-0">
+            <img
+              src={bookingInfo.hinhAnh}
+              alt={bookingInfo.biDanh}
+              className="object-cover h-full w-full"
+            />
+          </div>
+          <div className="movieDetails__detail">
+            <div className="flex items-center">
+              <p className="mb-0 mr-2 font-bold text-2xl uppercase">
+                {bookingInfo.tenPhim}
+              </p>
+              {bookingInfo.hot ? (
+                <Tag color="#f50" className="font-bold">
+                  HOT
+                </Tag>
+              ) : (
+                <></>
+              )}
+            </div>
+            <p className="pb-7 border-b border-b-white/70">
+              Rating:{" "}
+              <span className="font-semibold text-lg text-red-500">
+                {bookingInfo.danhGia}
+              </span>
+              /10
+            </p>
+            <p className="mb-2 text-lg leading-loose text-justify">
+              {bookingInfo.moTa}
+            </p>
+          </div>
+        </div>
+      )}
+      <div className="showtime">{renderTheatreChains()}</div>
+    </div>
+  );
 }
+
+// {
+//   "maPhim": 8803,
+//   "tenPhim": "Fantastic Beasts 2",
+//   "biDanh": "fantastic-beasts-2",
+//   "trailer": "https://youtu.be/8bYBOVWLNIs",
+//   "hinhAnh": "https://movienew.cybersoft.edu.vn/hinhanh/fantastic-beasts-2_gp02.jpg",
+//   "moTa": "Một vài tháng khi Newt Scamander (Eddie Redmayne) giúp vén màn bí mật và bắt giữ phù thủy bóng tối Gellert Grindelwald (Johnny Depp). Tuy nhiên, Grinderwald đã làm một cuộc tẩu thoát ngoạn mục và thu nạp được lực lượng những người đi theo mình. Người duy nhất trong hoàn cảnh bấy giờ có thể ngăn chặn Grindelwald chính là Albus Dumbledore (Jude Law). Cuộc hành trình chống lại thế lực bóng tối này còn có sự góp mặt của Tina (Katherine Waterson), Queenie (Alison Sudol) và Jacob (Dan Fogler). Đây sẽ là phép thử để mọi người chứng minh lòng trung thành khi đối mặt với thế lực bóng đêm. ",
+//   "maNhom": "GP02",
+//   "hot": false,
+//   "dangChieu": true,
+//   "sapChieu": false,
+//   "ngayKhoiChieu": "2022-09-24T22:49:11.927",
+//   "danhGia": 8
+// }

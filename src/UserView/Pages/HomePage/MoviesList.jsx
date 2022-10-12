@@ -34,11 +34,13 @@ export default function MoviesList({ moviesList }) {
         <div className="h-full flex flex-col justify-between">
           <div className="text-white/70">
             <NavLink to={`/detail/${movie.maPhim}`}>
-              <p className="truncate mb-2 font-semibold text-lg text-white">
+              <span className="truncate font-semibold text-lg text-white">
                 {movie.tenPhim}
-              </p>
+              </span>
             </NavLink>
-            <p className="text-justify">{hideLongString(movie.moTa, 70)}</p>
+            <p className="text-justify mt-2">
+              {hideLongString(movie.moTa, 70)}
+            </p>
             <p className="font-semibold">
               Khởi chiếu:{" "}
               <span className="text-white">
@@ -50,7 +52,7 @@ export default function MoviesList({ moviesList }) {
             <NavLink to={`/booking/${movie.maPhim}`}>
               <button
                 type="button"
-                className="px-8 py-2.5 bg-red-600 hover:bg-red-700 rounded-3xl focus:ring-4 focus:outline-none focus:ring-red-900 font-medium text-xl text-white"
+                className="px-8 py-2.5 bg-red-600 hover:bg-red-700 rounded-3xl focus:ring-4 focus:outline-none focus:ring-red-900 font-medium text-xl text-white transition duration-300"
               >
                 Đặt vé ngay
               </button>

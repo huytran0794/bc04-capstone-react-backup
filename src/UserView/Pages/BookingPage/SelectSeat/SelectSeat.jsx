@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import NotifyModal from "../../../../HOC/NotifyModal";
 import { movieServ } from "../../../../services/movieServ";
 import { webColor } from "../../../constants/colorConstant";
 import {
@@ -11,6 +12,7 @@ import SeatDetails from "./SeatDetails";
 import SelectedDetailTickets from "./SelectedDetailTickets";
 
 export default function SelectSeat() {
+  let [isNotifyModalOpen, setIsNotifyModalOpen] = useState(false);
   let [seatsList, setSeatsList] = useState(null);
   let [scheduleInfo, setScheduleInfo] = useState(null);
   let params = useParams();
@@ -18,6 +20,8 @@ export default function SelectSeat() {
   let selectedSeatList = useSelector((state) => {
     return state.movieSlice.selectedSeatList;
   });
+
+  // Lấy thông tin lịch chiếu theo mã lịch chiếu
   useEffect(() => {
     movieServ
       .getScheduleDetails(params.maLichChieu)
@@ -37,6 +41,15 @@ export default function SelectSeat() {
       });
   }, []);
 
+  // HANDLE Notify Modal
+  let handleOKClick = () => {
+    setIsNotifyModalOpen(false);
+  };
+  let handleCancelClick = () => {
+    setIsNotifyModalOpen(false);
+  };
+
+  // HANDLE chọn ghế
   let handleSelectSeat = (seatInfo) => {
     let newSelectedSeatList = [...selectedSeatList];
     if (seatInfo.daDat) return;
@@ -52,6 +65,7 @@ export default function SelectSeat() {
     dispatch(setSelectedSeatList(newSelectedSeatList));
   };
 
+  // Render danh sách ghế ra màn hình
   let renderSeats = () => {
     // console.log("run 2");
     return (
@@ -89,31 +103,58 @@ export default function SelectSeat() {
   };
   // console.log("run");
   // console.log(selectedSeatList);
+  if (!scheduleInfo) return null;
   return (
-    <div className="container max-w-screen-md mx-auto">
-      <div>
-        <h2 className="text-white">BOOKING ONLINE</h2>
-        <p>
-          {scheduleInfo?.tenCumRap} | {scheduleInfo?.tenRap}
-        </p>
-        <p>
-          Giờ chiếu: {scheduleInfo?.gioChieu} {scheduleInfo?.ngayChieu}
-        </p>
+    <>
+      <div className="container mx-auto">
+        <h2 className="mb-6 pb-3 border-b-2 text-3xl text-white">Đặt vé</h2>
+        <div className="container max-w-screen-lg mx-auto border border-white/50">
+          <div className="theatreInfo p-5">
+            <p className="mb-2 font-bold text-2xl uppercase">
+              {scheduleInfo.tenPhim}
+            </p>
+            <p className="mb-1 font-semibold text-xl">
+              {scheduleInfo.tenCumRap} | {scheduleInfo.tenRap}
+            </p>
+            <p className="text-white/80">{scheduleInfo.diaChi}</p>
+            <p className="mb-0 text-lg text-white/80">
+              Giờ chiếu:{" "}
+              <span className="text-white font-semibold">
+                {scheduleInfo.gioChieu} {scheduleInfo.ngayChieu}
+              </span>
+            </p>
+          </div>
+          <div className="mb-8">
+            <p className="py-2 px-5 bg-gray-600 text-center text-lg font-semibold text-white">
+              Chọn ghế
+            </p>
+            {/* <p className="py-2 text-center text-xl font-semibold text-gray-500">
+            Màn hình
+          </p> */}
+            <div className="px-5">
+              <img
+                className="w-full mt-8 mb-12"
+                src="https://www.cgv.vn/skin/frontend/cgv/default/images/bg-cgv/bg-screen.png"
+                alt=""
+              />
+            </div>
+            {renderSeats()}
+          </div>
+          <SelectedDetailTickets
+            setIsNotifyModalOpen={setIsNotifyModalOpen}
+            scheduleInfo={scheduleInfo}
+            selectedSeatList={selectedSeatList}
+          />
+        </div>
       </div>
-      <div className="my-5">
-        <p className="py-2 bg-gray-600 text-center text-xl font-semibold text-white">
-          Người/Ghế
-        </p>
-        <p className="py-2 text-center text-xl font-semibold text-gray-500">
-          Màn hình
-        </p>
-        {renderSeats()}
-      </div>
-      <SelectedDetailTickets
-        scheduleInfo={scheduleInfo}
-        selectedSeatList={selectedSeatList}
-      />
-    </div>
+      <NotifyModal
+        isNotifyModalOpen={isNotifyModalOpen}
+        handleOKClick={handleOKClick}
+        handleCancelClick={handleCancelClick}
+      >
+        Vui lòng chọn ghế để tiếp tục đặt vé
+      </NotifyModal>
+    </>
   );
 }
 

@@ -7,3 +7,53 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+/* Showtime Theatres Chain */
+.showtimeChains.ant-tabs-top .ant-tabs-nav::before {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.showtimeChains
+  .ant-tabs-nav
+  .ant-tabs-nav-wrap
+  .ant-tabs-nav-list
+  .ant-tabs-ink-bar {
+  background-color: white;
+}
+
+/* Showtime Date List */
+.showtimeDates
+  .ant-tabs-nav
+  .ant-tabs-nav-wrap
+  .ant-tabs-nav-list
+  .ant-tabs-ink-bar {
+  height: 0;
+}
+.showtimeDates
+  .ant-tabs-nav
+  .ant-tabs-nav-wrap
+  .ant-tabs-nav-list
+  .ant-tabs-tab
+  .ant-tabs-tab-btn
+  .showdate {
+  border: 1px solid transparent;
+  border-radius: 8px;
+}
+.showtimeDates
+  .ant-tabs-nav
+  .ant-tabs-nav-wrap
+  .ant-tabs-nav-list
+  .ant-tabs-tab
+  .ant-tabs-tab-btn
+  .showdate:hover {
+  border-color: white;
+}
+.showtimeDates
+  .ant-tabs-nav
+  .ant-tabs-nav-wrap
+  .ant-tabs-nav-list
+  .ant-tabs-tab-active
+  .ant-tabs-tab-btn
+  .showdate {
+  border-color: white;
+}
