@@ -13,7 +13,6 @@ import { NavLink } from "react-router-dom";
 
 export default function MoviesBanner() {
   let [bannerList, setBannerList] = useState(null);
-  let [isBannerHovered, setIsBannerHovered] = useState(false);
 
   useEffect(() => {
     movieServ
@@ -34,8 +33,7 @@ export default function MoviesBanner() {
         <SwiperSlide key={banner.maPhim.toString() + index}>
           <div
             style={movieStyle.bannerWrapper}
-            onMouseEnter={() => setIsBannerHovered(true)}
-            onMouseLeave={() => setIsBannerHovered(false)}
+            className="homePage__banner-wrapper"
           >
             <img
               src={banner.hinhAnh}
@@ -44,12 +42,12 @@ export default function MoviesBanner() {
             />
             <div
               style={movieStyle.bannerOverlay}
-              className={isBannerHovered ? "flex" : "hidden"}
+              className="homePage__banner-overlay"
             >
               <NavLink to={`/detail/${banner.maPhim}`}>
                 <button
                   type="button"
-                  class="mr-5 border focus:outline-none focus:ring-4 font-medium rounded-lg text-xl p-8 dark:bg-gray-800/75 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700/75 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                  className="mr-5 p-8 bg-gray-800/75 hover:bg-gray-700/75 border border-gray-600 rounded-lg focus:outline-none focus:ring-4 focus:ring-gray-700 font-medium text-white text-xl transition duration-300"
                 >
                   Xem chi tiết
                 </button>
@@ -57,7 +55,7 @@ export default function MoviesBanner() {
               <NavLink to={`/booking/${banner.maPhim}`}>
                 <button
                   type="button"
-                  class="focus:outline-none text-white focus:ring-4 font-medium rounded-lg text-xl p-8 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                  className="p-8 bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-4 rounded-lg focus:ring-red-900 font-medium text-white text-xl transition duration-300"
                 >
                   Đặt vé
                 </button>
@@ -71,6 +69,7 @@ export default function MoviesBanner() {
 
   return (
     <Swiper
+      className="homePage__banner"
       modules={[Navigation, Pagination]}
       spaceBetween={50}
       slidesPerView={1}

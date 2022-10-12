@@ -1,3 +1,4 @@
+import { message } from "antd";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
@@ -15,15 +16,18 @@ export default function UserNav() {
     localServ.user.remove();
     dispatch(removeUserInfo());
     setNotifyModalOpen(false);
-    window.location.href = "/";
+    message.success("Đăng xuất thành công", 2000);
+    setTimeout(() => {
+      window.location.href = "/";
+    }, 2000);
   };
 
   let renderContent = () => {
     if (user) {
       return (
-        <>
+        <div className="flex flex-col justify-center text-center">
           <NavLink to="/login">
-            <span className="text-white text-lg mr-2">
+            <span className="text-white text-lg">
               Xin chào{" "}
               <span className="font-bold text-xl text-red-500">
                 {user.hoTen}
@@ -32,14 +36,14 @@ export default function UserNav() {
           </NavLink>
           <button
             type="button"
-            className="px-5 py-2.5 bg-gray-800 hover:bg-gray-700 border border-gray-600 rounded-lg hover:border-gray-600 focus:ring-4 focus:ring-gray-700 focus:outline-none font-medium text-sm text-white"
+            className="px-4 py-1 bg-gray-800 hover:bg-gray-700 border border-gray-600 rounded-lg hover:border-gray-600 focus:ring-4 focus:ring-gray-700 focus:outline-none font-medium text-sm text-white"
             onClick={() => {
               setNotifyModalOpen(true);
             }}
           >
             Đăng xuất
           </button>
-        </>
+        </div>
       );
     }
     return (
@@ -56,7 +60,7 @@ export default function UserNav() {
     );
   };
   return (
-    <div>
+    <>
       {renderContent()}
       <NotifyModal
         isNotifyModalOpen={isNotifyModalOpen}
@@ -67,6 +71,6 @@ export default function UserNav() {
       >
         Bạn có muốn đăng xuất?
       </NotifyModal>
-    </div>
+    </>
   );
 }

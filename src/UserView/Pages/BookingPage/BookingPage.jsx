@@ -134,7 +134,7 @@ export default function BookingPage() {
   };
 
   return (
-    <div className="container mx-auto">
+    <div className="container max-w-screen-xl mx-auto">
       <h2 className="pb-3 mb-6 border-b-2 text-3xl text-white">Đặt vé</h2>
       {!bookingInfo ? null : (
         <div className="movieDetails flex mb-5">

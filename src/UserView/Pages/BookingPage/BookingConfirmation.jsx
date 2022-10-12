@@ -15,71 +15,19 @@ export default function BookingConfirmation() {
   let navigate = useNavigate();
   let dispatch = useDispatch();
 
+  let [isBookingSuccessOpen, setIsBookingSuccessOpen] = useState(false);
   let selectedSeatList = useSelector(
     (state) => state.movieSlice.selectedSeatList
   );
   let selectedMovieInfo = useSelector(
     (state) => state.movieSlice.selectedMovieInfo
   );
-  let [isBookingSuccessOpen, setIsBookingSuccessOpen] = useState(false);
 
   useEffect(() => {
     if (selectedMovieInfo === null) {
       navigate(`/selectseat/${params.maLichChieu}`);
     }
   }, []);
-
-  let renderTicketDetails = () => {
-    return (
-      <>
-        {selectedSeatList.map((item, index) => {
-          return (
-            <tr
-              className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-              key={item.maGhe.toString() + index}
-            >
-              <th scope="row" className="py-4 px-6">
-                {index + 1}
-              </th>
-              <td className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                {item.tenGhe}
-              </td>
-              <td className="py-4 px-6">
-                {item.loaiGhe === "Thuong" ? "Thường" : "VIP"}
-              </td>
-              <td className="py-4 px-6">{numberWithCommas(item.giaVe)}</td>
-              <td className="py-4 px-6">{numberWithCommas(item.giaVe)}</td>
-            </tr>
-          );
-        })}
-        <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-          <td
-            className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-            colSpan={4}
-          >
-            TỔNG CỘNG:
-          </td>
-          <td className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-            {numberWithCommas(getTotalPrice())}
-          </td>
-        </tr>
-        <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-          <td
-            className="py-4 px-6 font-medium text-right text-gray-900 whitespace-nowrap dark:text-white"
-            colSpan={5}
-          >
-            <button
-              type="button"
-              className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-              onClick={handleXacNhanDatVe}
-            >
-              Đặt vé
-            </button>
-          </td>
-        </tr>
-      </>
-    );
-  };
 
   let getTotalPrice = () =>
     selectedSeatList.reduce((total, item) => total + item.giaVe, 0);
@@ -105,29 +53,98 @@ export default function BookingConfirmation() {
         console.log(err);
       });
   };
+
+  let renderTicketDetails = () => {
+    return (
+      <>
+        {selectedSeatList.map((item, index) => {
+          return (
+            <tr
+              className="border-white/50 border-b"
+              key={item.maGhe.toString() + index}
+            >
+              <th scope="row" className="py-4 px-6">
+                {index + 1}
+              </th>
+              <td className="py-4 px-6 font-medium text-white whitespace-nowrap">
+                {item.tenGhe}
+              </td>
+              <td className="py-4 px-6">
+                {item.loaiGhe === "Thuong" ? "Thường" : "VIP"}
+              </td>
+              <td className="py-4 px-6">{numberWithCommas(item.giaVe)} đ</td>
+              <td className="py-4 px-6">{numberWithCommas(item.giaVe)} đ</td>
+            </tr>
+          );
+        })}
+        <tr className="border-white/50 border-b text-lg">
+          <td
+            className="py-4 px-6 font-medium text-white whitespace-nowrap"
+            colSpan={4}
+          >
+            TỔNG CỘNG:
+          </td>
+          <td className="py-4 px-6 font-medium text-white whitespace-nowrap">
+            {numberWithCommas(getTotalPrice())} đ
+          </td>
+        </tr>
+        <tr className="border-white/50 border-b">
+          <td colSpan={4}></td>
+          <td className="py-4 px-6 font-medium text-white whitespace-nowrap">
+            <button
+              type="button"
+              className="px-5 py-2.5 bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-4 rounded-lg focus:ring-red-900 font-medium text-white text-xl transition duration-300"
+              onClick={handleXacNhanDatVe}
+            >
+              Đặt vé
+            </button>
+          </td>
+        </tr>
+      </>
+    );
+  };
+
   return (
-    <div className="container mx-auto">
-      <div className="flex items-center">
-        <img
-          className="w-1/5"
-          src={selectedMovieInfo?.hinhAnh}
-          alt={selectedMovieInfo?.tenPhim}
-        />
-        <div className="text-white">
-          <p>{selectedMovieInfo?.tenPhim}</p>
-          <p>
-            {selectedMovieInfo?.gioChieu} {selectedMovieInfo?.ngayChieu}
-          </p>
-          <p>{selectedMovieInfo?.tenCumRap}</p>
-          <p>{selectedMovieInfo?.tenRap}</p>
-          <p>Ghế: {bookingUtils.renderSelectedSeat(selectedSeatList)}</p>
+    <div className="container max-w-screen-xl mx-auto">
+      <h2 className="pb-3 mb-6 border-b-2 text-3xl text-white">Đặt vé</h2>
+      {!selectedMovieInfo ? null : (
+        <div className="movieInfo flex mb-5">
+          <div className="movieInfo__cover w-1/6 h-80 mr-6 flex-shrink-0">
+            <img
+              src={selectedMovieInfo.hinhAnh}
+              alt={selectedMovieInfo.tenPhim}
+              className="object-cover h-full w-full"
+            />
+          </div>
+          <div className="movieInfo__detail">
+            <p className="mb-2 font-bold text-2xl uppercase">
+              {selectedMovieInfo.tenPhim}
+            </p>
+            <p className="mb-0 font-semibold text-lg">
+              {selectedMovieInfo.tenCumRap}
+            </p>
+            <p className="mb-2 text-white/80">{selectedMovieInfo.diaChi}</p>
+            <p className="mb-0 text-lg">{selectedMovieInfo.tenRap}</p>
+            <p className="mb-0 text-white/70 text-[16px]">
+              Ghế:{" "}
+              <span className="font-semibold text-lg text-white">
+                {bookingUtils.renderSelectedSeat(selectedSeatList)}
+              </span>
+            </p>
+            <p className="mb-2 text-white/70 text-[16px]">
+              Xuất chiếu:{" "}
+              <span className="font-semibold text-lg text-white">
+                {selectedMovieInfo.gioChieu} {selectedMovieInfo.ngayChieu}
+              </span>
+            </p>
+          </div>
         </div>
-      </div>
+      )}
       <div>
-        <p>Chi tiết</p>
+        <h3 className="pb-3 mb-6 border-b-2 text-3xl text-white">Chi tiết</h3>
         <div className="overflow-x-auto relative">
-          <table className="w-full text-sm text-center text-gray-500 dark:text-gray-400">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <table className="w-full text-center text-gray-400">
+            <thead className="uppercase bg-gray-700/70 text-white/70">
               <tr>
                 <th scope="col" className="py-3 px-6">
                   STT
@@ -146,7 +163,7 @@ export default function BookingConfirmation() {
                 </th>
               </tr>
             </thead>
-            <tbody>{renderTicketDetails()}</tbody>
+            <tbody className="text-[16px]">{renderTicketDetails()}</tbody>
           </table>
         </div>
       </div>

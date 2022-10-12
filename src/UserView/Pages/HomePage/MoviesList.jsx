@@ -11,12 +11,12 @@ export default function MoviesList({ moviesList }) {
       <Card
         style={{
           width: "100%",
-          height: "520px",
+          height: "530px",
           background: webColor.bgPrimary,
           color: "white",
         }}
         bodyStyle={{
-          height: "220px",
+          height: "230px",
           padding: "0.8rem",
         }}
         bordered={false}
@@ -48,7 +48,7 @@ export default function MoviesList({ moviesList }) {
               </span>
             </p>
           </div>
-          <div>
+          <div className="text-center">
             <NavLink to={`/booking/${movie.maPhim}`}>
               <button
                 type="button"
@@ -65,7 +65,7 @@ export default function MoviesList({ moviesList }) {
   return (
     <div className="my-10">
       <h3 className="font-semibold text-white text-2xl">DANH SÁCH PHIM</h3>
-      <div className="grid grid-cols-5 gap-5">
+      <div className="grid grid-cols-1 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-5">
         {moviesList.map((movie, index) => (
           <div key={movie.maPhim.toString() + index}>
             {renderMovieItem(movie)}

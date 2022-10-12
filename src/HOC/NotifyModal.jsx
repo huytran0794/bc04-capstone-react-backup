@@ -14,31 +14,44 @@ export default function NotifyModal({
   return createPortal(
     <>
       <div style={generalStyle.modalOverlay}></div>
-      <div style={generalStyle.modal} className="w-2/5">
-        <div className="modalHeader px-10 flex justify-end items-center">
-          <span
-            className="text-black cursor-pointer"
-            onClick={handleCancelClick}
-          >
-            {heroIcon.xIcon}
-          </span>
-        </div>
-        <div className="modalBody px-10 text-black">{children}</div>
-        <div className="modalFooter px-10 py-5 flex justify-between items-center">
-          <button
-            type="button"
-            class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-            onClick={handleOKClick}
-          >
-            OK
-          </button>
-          <button
-            type="button"
-            class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
-            onClick={handleCancelClick}
-          >
-            Cancel
-          </button>
+      {/* <div  className="w-2/5"> */}
+      <div
+        style={generalStyle.modal}
+        className="overflow-y-auto overflow-x-hidden w-full md:w-[672px] px-5 md:px-0"
+      >
+        <div className="relative p-4 w-full max-w-2xl h-full md:h-auto">
+          {/* <!-- Modal content --> */}
+          <div className="relative bg-gray-900/95 rounded-lg shadow">
+            {/* <!-- Modal header --> */}
+            <div className="flex justify-between items-start p-4 rounded-t border-b border-gray-600">
+              <button
+                type="button"
+                className="text-gray-400 bg-transparent dark:hover:bg-gray-600 dark:hover:text-white rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
+                onClick={handleCancelClick}
+              >
+                {heroIcon.xIcon}
+              </button>
+            </div>
+            {/* <!-- Modal body --> */}
+            <div className="p-6 text-xl text-white">{children}</div>
+            {/* <!-- Modal footer --> */}
+            <div className="flex items-center p-6 space-x-2 rounded-b border-t border-gray-600">
+              <button
+                type="button"
+                className="px-5 py-2.5 bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-4 rounded-lg focus:ring-red-900 font-medium text-white text-lg transition duration-300"
+                onClick={handleOKClick}
+              >
+                OK
+              </button>
+              <button
+                type="button"
+                className="px-5 py-2.5 bg-gray-700 hover:bg-gray-600 rounded-lg border border-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-600 font-medium text-xl text-gray-300 hover:text-white transition duration-300"
+                onClick={handleCancelClick}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </>,

@@ -106,7 +106,7 @@ export default function SelectSeat() {
   if (!scheduleInfo) return null;
   return (
     <>
-      <div className="container mx-auto">
+      <div className="container max-w-screen-xl mx-auto">
         <h2 className="mb-6 pb-3 border-b-2 text-3xl text-white">Đặt vé</h2>
         <div className="container max-w-screen-lg mx-auto border border-white/50">
           <div className="theatreInfo p-5">
