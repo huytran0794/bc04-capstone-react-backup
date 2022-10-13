@@ -16,7 +16,7 @@ export default function UserNav() {
     localServ.user.remove();
     dispatch(removeUserInfo());
     setNotifyModalOpen(false);
-    message.success("Đăng xuất thành công", 2000);
+    message.success("Đăng xuất thành công", 2);
     setTimeout(() => {
       window.location.href = "/";
     }, 2000);

@@ -21,15 +21,20 @@ export default function TheatresListPage() {
   let renderTheatreChainsList = () =>
     theatreChains?.map((chain, index) => ({
       label: (
-        <img className="w-16 h-16" src={chain.logo} alt={chain.maHeThongRap} />
+        <img
+          className="w-16 h-16 mb-2"
+          src={chain.logo}
+          alt={chain.maHeThongRap}
+        />
       ),
       key: chain.maHeThongRap.toString() + index,
       children: (
         <Tabs
+          className="theatre__lists"
           defaultActiveKey="1"
           tabPosition="left"
           style={{
-            height: 400,
+            maxHeight: "70vh",
           }}
           items={renderTheatresList(chain.lstCumRap)}
         />
@@ -38,14 +43,17 @@ export default function TheatresListPage() {
   let renderTheatresList = (lstCumRap) =>
     lstCumRap?.map((cumRap, index) => ({
       label: (
-        <div className="text-left text-white hover:text-red-400">
-          <p>{cumRap.tenCumRap}</p>
-          <p>{cumRap.diaChi}</p>
+        <div className="theatre__details text-left text-white/50 hover:text-white transition duration-300">
+          <p className="mb-0 font-semibold text-[16px]">{cumRap.tenCumRap}</p>
+          <p className="mb-0">{cumRap.diaChi}</p>
         </div>
       ),
       key: cumRap.maCumRap.toString() + index,
       children: (
-        <div style={{ height: "400px", overflowY: "scroll" }}>
+        <div
+          style={{ maxHeight: "70vh", overflowY: "scroll" }}
+          className="space-y-4"
+        >
           {cumRap.danhSachPhim.map((movie, index) => (
             <div key={movie.maPhim.toString() + index}>
               <MovieTabItem movie={movie} />
@@ -55,12 +63,16 @@ export default function TheatresListPage() {
       ),
     }));
   return (
-    <div className="container mx-auto">
+    <div className="ourTheatres container xl:max-w-screen-xl mx-auto px-2 sm:px-0">
+      <h2 className="mb-5 pb-3 border-b-2 text-3xl text-white">
+        Hệ thống rạp chiếu của chúng tôi
+      </h2>
       <Tabs
+        className="theatre__chains"
         defaultActiveKey="1"
         tabPosition="top"
         style={{
-          height: 500,
+          maxHeight: "90vh",
         }}
         items={renderTheatreChainsList()}
       />

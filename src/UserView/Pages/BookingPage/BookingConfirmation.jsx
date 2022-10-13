@@ -1,3 +1,4 @@
+import { message } from "antd";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -33,9 +34,12 @@ export default function BookingConfirmation() {
     selectedSeatList.reduce((total, item) => total + item.giaVe, 0);
 
   let handleCloseBookingSuccess = () => {
-    dispatch(setSelectedSeatList([]));
-    dispatch(setSelectedMovieInfo(null));
-    navigate("/");
+    message.success("Chuyển hướng về Trang chủ", 2);
+    setTimeout(() => {
+      dispatch(setSelectedSeatList([]));
+      dispatch(setSelectedMovieInfo(null));
+      navigate("/");
+    }, 2000);
   };
 
   let handleXacNhanDatVe = () => {
@@ -88,15 +92,15 @@ export default function BookingConfirmation() {
             {numberWithCommas(getTotalPrice())} đ
           </td>
         </tr>
-        <tr className="border-white/50 border-b">
+        <tr>
           <td colSpan={4}></td>
-          <td className="py-4 px-6 font-medium text-white whitespace-nowrap">
+          <td className="pt-6 pb-3 px-6 font-medium text-white whitespace-nowrap">
             <button
               type="button"
-              className="px-5 py-2.5 bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-4 rounded-lg focus:ring-red-900 font-medium text-white text-xl transition duration-300"
+              className="px-5 py-2.5 bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-4 rounded-lg focus:ring-red-900 font-medium text-white text-lg md:text-xl transition duration-300"
               onClick={handleXacNhanDatVe}
             >
-              Đặt vé
+              Thanh toán
             </button>
           </td>
         </tr>
@@ -105,19 +109,19 @@ export default function BookingConfirmation() {
   };
 
   return (
-    <div className="container max-w-screen-xl mx-auto">
+    <div className="container xl:max-w-screen-xl mx-auto px-2 sm:px-0">
       <h2 className="pb-3 mb-6 border-b-2 text-3xl text-white">Đặt vé</h2>
       {!selectedMovieInfo ? null : (
         <div className="movieInfo flex mb-5">
-          <div className="movieInfo__cover w-1/6 h-80 mr-6 flex-shrink-0">
+          <div className="movieInfo__cover w-1/4 lg:w-1/6 mr-6 flex-shrink-0">
             <img
               src={selectedMovieInfo.hinhAnh}
               alt={selectedMovieInfo.tenPhim}
-              className="object-cover h-full w-full"
+              className="object-contain w-full"
             />
           </div>
           <div className="movieInfo__detail">
-            <p className="mb-2 font-bold text-2xl uppercase">
+            <p className="mb-2 font-bold text-xl lg:text-2xl uppercase">
               {selectedMovieInfo.tenPhim}
             </p>
             <p className="mb-0 font-semibold text-lg">
@@ -141,7 +145,9 @@ export default function BookingConfirmation() {
         </div>
       )}
       <div>
-        <h3 className="pb-3 mb-6 border-b-2 text-3xl text-white">Chi tiết</h3>
+        <h3 className="pb-3 mb-6 border-b-2 text-2xl lg:text-3xl text-white">
+          Chi tiết
+        </h3>
         <div className="overflow-x-auto relative">
           <table className="w-full text-center text-gray-400">
             <thead className="uppercase bg-gray-700/70 text-white/70">

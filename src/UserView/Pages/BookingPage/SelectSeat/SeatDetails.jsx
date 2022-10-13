@@ -23,13 +23,13 @@ export default function SeatDetails({
   };
   return (
     <div
-      className="p-1 flex justify-center items-center"
+      className="p-0 md:p-1 flex justify-center items-center"
       style={seatStatus()}
       onClick={() => {
         handleSelectSeat(seatInfo);
       }}
     >
-      <p className="m-0">{seatInfo.tenGhe}</p>
+      <p className="m-0 text-xs md:text-sm">{seatInfo.tenGhe}</p>
     </div>
   );
 }

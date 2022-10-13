@@ -44,8 +44,8 @@ export default function DetailMovie() {
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
       ></iframe>
-      <div className="container max-w-screen-xl mx-auto my-8 flex">
-        <div className="movieShortDetails mb-5 w-1/4 flex-shrink-0">
+      <div className="container xl:max-w-screen-xl mx-auto my-8 px-2 sm:px-0 flex">
+        <div className="movieShortDetails mb-5 mr-4 sm:mr-0 w-1/4 flex-shrink-0">
           <div>
             <p className="mb-0 mr-2 font-bold text-2xl">
               <span className="mr-2">{movieDetail?.tenPhim}</span>

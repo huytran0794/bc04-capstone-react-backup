@@ -70,7 +70,7 @@ export default function SelectSeat() {
     // console.log("run 2");
     return (
       <>
-        <div className="max-w-lg mx-auto grid grid-cols-10 gap-4">
+        <div className="max-w-xl mx-auto p-5 sm:p-0 grid grid-cols-16 gap-2">
           {seatsList?.map((seatInfo, index) => (
             <SeatDetails
               key={seatInfo.maGhe.toString() + index}
@@ -106,7 +106,7 @@ export default function SelectSeat() {
   if (!scheduleInfo) return null;
   return (
     <>
-      <div className="container max-w-screen-xl mx-auto">
+      <div className="container xl:max-w-screen-xl mx-auto px-2 sm:px-0">
         <h2 className="mb-6 pb-3 border-b-2 text-3xl text-white">Đặt vé</h2>
         <div className="container max-w-screen-lg mx-auto border border-white/50">
           <div className="theatreInfo p-5">

@@ -8,14 +8,15 @@
   box-sizing: border-box;
 }
 
-/* HOMEPAGE */
-/* Banner */
-/* overlay */
+/* START HOMEPAGE */
+/* Start Banner */
+/* start overlay */
 .homePage__banner .homePage__banner-wrapper:hover .homePage__banner-overlay {
   opacity: 1 !important;
 }
+/* End overlay */
 
-/* navigation button */
+/* start navigation button */
 .homePage__banner .swiper-button-prev,
 .homePage__banner .swiper-button-next {
   width: 60px;
@@ -40,8 +41,9 @@
     rgb(255, 255, 255, 0)
   );
 }
+/* end navigation button */
 
-/* pagination bullet */
+/* start pagination bullet */
 .homePage__banner .swiper-pagination-bullet {
   width: 14px;
   height: 14px;
@@ -54,9 +56,47 @@
   border-color: #fff;
   background-color: transparent;
 }
+/* end pagination bullet */
+/* End Banner */
+/* END HOMEPAGE */
 
-/* BOOKINGPAGE */
-/* Showtime Theatres Chain */
+/* START THEATRES LIST PAGE */
+/* start ink bar */
+.theatre__chains.ant-tabs-top .ant-tabs-nav::before {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+.theatre__lists.ant-tabs-left .ant-tabs-content-holder {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+.theatre__chains
+  .ant-tabs-nav
+  .ant-tabs-nav-wrap
+  .ant-tabs-nav-list
+  .ant-tabs-ink-bar {
+  background-color: white;
+}
+/* end ink bar */
+
+/* Start Theatre list */
+.theatre__chains > .ant-tabs-content-holder {
+  padding-bottom: 16px;
+}
+.theatre__lists
+  .ant-tabs-nav
+  .ant-tabs-nav-wrap
+  .ant-tabs-nav-list
+  .ant-tabs-tab-active
+  .ant-tabs-tab-btn
+  .theatre__details {
+  color: white;
+}
+
+/* End Theater List */
+/* END THEATRES LIST PAGE */
+
+/* START BOOKINGPAGE */
+/* Start Showtime Theatres Chain */
+/* start ink bar */
 .showtimeChains.ant-tabs-top .ant-tabs-nav::before {
   border-color: rgba(255, 255, 255, 0.5);
 }
@@ -67,8 +107,10 @@
   .ant-tabs-ink-bar {
   background-color: white;
 }
+/* end ink bar */
+/* End Showtime Theatres Chain */
 
-/* Showtime Date List */
+/* Start Showtime Date List */
 .showtimeDates
   .ant-tabs-nav
   .ant-tabs-nav-wrap
@@ -104,3 +146,5 @@
   .showdate {
   border-color: white;
 }
+/* End Showtime Date List */
+/* END BOOKINGPAGE */

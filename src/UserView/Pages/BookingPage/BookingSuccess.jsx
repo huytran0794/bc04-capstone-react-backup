@@ -16,7 +16,10 @@ export default function BookingSuccess({
   return createPortal(
     <>
       <div style={generalStyle.modalOverlay}></div>
-      <div style={generalStyle.modal} className="bookingSuccess">
+      <div
+        style={generalStyle.modal}
+        className="bookingSuccess bg-white p-5 w-2/3 sm:w-3/5 md:w-1/2 lg:w-auto"
+      >
         <div className="absolute top-3 right-3">
           <button onClick={handleCloseBookingSuccess}>{heroIcon.xIcon}</button>
         </div>

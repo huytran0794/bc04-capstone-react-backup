@@ -1,6 +1,10 @@
 import { https, maNhom } from "./configURL";
 
 export const movieServ = {
+  getTheatreChainsList: () => {
+    let uri = "/api/QuanLyRap/LayThongTinHeThongRap";
+    return https.get(uri);
+  },
   getMovieList: () => {
     let uri = `/api/QuanLyPhim/LayDanhSachPhim?maNhom=${maNhom}`;
     return https.get(uri);

@@ -20,7 +20,7 @@ export default function HomePage() {
   return (
     <>
       <MoviesBanner />
-      <div className="container max-w-screen-xl mx-auto">
+      <div className="container xl:max-w-screen-xl mx-auto">
         <MoviesList moviesList={movies} />
       </div>
     </>

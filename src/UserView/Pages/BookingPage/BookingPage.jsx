@@ -22,26 +22,46 @@ export default function BookingPage() {
   const onChange = (key) => {
     console.log(key);
   };
-  const renderTheatreChains = () => (
-    <Tabs
-      className="showtimeChains"
-      defaultActiveKey="1"
-      onChange={onChange}
-      items={bookingInfo?.heThongRapChieu.map((heThongRap, index) => {
-        return {
-          label: (
-            <img
-              className="w-16 h-16 mb-2"
-              src={heThongRap.logo}
-              alt={heThongRap.maHeThongRap}
-            />
-          ),
-          key: heThongRap.maHeThongRap.toString() + index,
-          children: renderTheatreList(heThongRap.cumRapChieu),
-        };
-      })}
-    />
-  );
+  let handleChonPhimKhac = () => {
+    window.location.href = "/";
+  };
+
+  const renderTheatreChains = () => {
+    if (bookingInfo?.heThongRapChieu.length === 0) {
+      return (
+        <div>
+          <p className="mb-1 text-xl">Phim hiện tại đã hết xuất chiếu.</p>
+          <button
+            type="button"
+            className="px-4 py-1.5 bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-4 rounded-md focus:ring-red-900 font-medium text-white text-lg transition duration-300"
+            onClick={handleChonPhimKhac}
+          >
+            Chọn phim khác
+          </button>
+        </div>
+      );
+    }
+    return (
+      <Tabs
+        className="showtimeChains"
+        defaultActiveKey="1"
+        onChange={onChange}
+        items={bookingInfo?.heThongRapChieu.map((heThongRap, index) => {
+          return {
+            label: (
+              <img
+                className="w-16 h-16 mb-2"
+                src={heThongRap.logo}
+                alt={heThongRap.maHeThongRap}
+              />
+            ),
+            key: heThongRap.maHeThongRap.toString() + index,
+            children: renderTheatreList(heThongRap.cumRapChieu),
+          };
+        })}
+      />
+    );
+  };
 
   const renderTheatreList = (cumRapChieu) => (
     <Tabs
@@ -123,7 +143,7 @@ export default function BookingPage() {
             to={`/selectseat/${showtime.maLichChieu}`}
             key={showtime.maLichChieu.toString() + index}
           >
-            <button className="px-5 py-2.5 m-2 border rounded-lg border-white/50 hover:border-white font-medium text-sm text-center text-white/50 hover:text-white">
+            <button className="px-5 py-2.5 m-2 border rounded-lg border-white/50 hover:border-white font-medium text-[16px] sm:text-lg text-center text-white/50 hover:text-white">
               {moment(showtime.ngayChieuGioChieu).format("hh:mm A")}
               {/* 2019-01-01T10:10:00 */}
             </button>
@@ -134,7 +154,7 @@ export default function BookingPage() {
   };
 
   return (
-    <div className="container max-w-screen-xl mx-auto">
+    <div className="container xl:max-w-screen-xl mx-auto pb-10 px-2 sm:px-0">
       <h2 className="pb-3 mb-6 border-b-2 text-3xl text-white">Đặt vé</h2>
       {!bookingInfo ? null : (
         <div className="movieDetails flex mb-5">
