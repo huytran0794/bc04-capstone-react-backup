@@ -7,11 +7,13 @@ import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import userSlice from "./UserView/redux/slices/userSlice";
 import movieSlice from "./UserView/redux/slices/movieSlice";
+import generalSlice from "./UserView/redux/slices/generalSlice";
 
-const store = configureStore({
+export const store = configureStore({
   reducer: {
     userSlice,
     movieSlice,
+    generalSlice,
   },
   devTools: true,
 });

@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import NotifyModal from "../../../../HOC/NotifyModal";
 import { movieServ } from "../../../../services/movieServ";
 import { webColor } from "../../../constants/colorConstant";
+import { setIsLoading } from "../../../redux/slices/generalSlice";
 import {
   setSelectedMovieInfo,
   setSelectedSeatList,
@@ -23,6 +24,7 @@ export default function SelectSeat() {
 
   // Lấy thông tin lịch chiếu theo mã lịch chiếu
   useEffect(() => {
+    dispatch(setIsLoading(true));
     movieServ
       .getScheduleDetails(params.maLichChieu)
       .then((res) => {
@@ -35,9 +37,11 @@ export default function SelectSeat() {
         setScheduleInfo(res.data.content.thongTinPhim);
         dispatch(setSelectedSeatList([]));
         dispatch(setSelectedMovieInfo(null));
+        dispatch(setIsLoading(false));
       })
       .catch((err) => {
         console.log(err);
+        dispatch(setIsLoading(false));
       });
   }, []);
 

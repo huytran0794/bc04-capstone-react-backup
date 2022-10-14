@@ -1,21 +1,28 @@
 import { Tabs, Tag } from "antd";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { NavLink, useParams } from "react-router-dom";
 import { movieServ } from "../../../services/movieServ";
+import { setIsLoading } from "../../redux/slices/generalSlice";
 
 export default function BookingPage() {
   let [bookingInfo, setBookingInfo] = useState(null);
   let params = useParams();
+  let dispatch = useDispatch();
+
   useEffect(() => {
+    dispatch(setIsLoading(true));
     movieServ
       .getMovieShowtimes(params.maPhim)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setBookingInfo(res.data.content);
+        dispatch(setIsLoading(false));
       })
       .catch((err) => {
         console.log(err);
+        dispatch(setIsLoading(false));
       });
   }, []);
 

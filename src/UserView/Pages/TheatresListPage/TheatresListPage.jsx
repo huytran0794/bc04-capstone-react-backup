@@ -2,20 +2,27 @@ import { Tabs } from "antd";
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { movieServ } from "../../../services/movieServ";
+import { setIsLoading } from "../../redux/slices/generalSlice";
 import MovieTabItem from "./MovieTabItem";
 
 export default function TheatresListPage() {
   let [theatreChains, setTheatreChains] = useState(null);
+  let dispatch = useDispatch();
+
   useEffect(() => {
+    dispatch(setIsLoading(true));
     movieServ
       .getMoviesByTheatres()
       .then((res) => {
         console.log(res);
         setTheatreChains(res.data.content);
+        dispatch(setIsLoading(false));
       })
       .catch((err) => {
         console.log(err);
+        dispatch(setIsLoading(false));
       });
   }, []);
   let renderTheatreChainsList = () =>

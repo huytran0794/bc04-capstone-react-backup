@@ -1,22 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 let initialState = {
-  isNotifyModalOpen: false,
+  isLoading: false,
 };
 
 const generalSlice = createSlice({
   name: "generalSlice",
   initialState,
   reducers: {
-    setNotifyModalOpen: (state) => {
-      state.isNotifyModalOpen = true;
-    },
-    setNotifyModalClose: (state) => {
-      state.isNotifyModalOpen = false;
+    setIsLoading: (state, action) => {
+      state.isLoading = action.payload;
     },
   },
 });
 
-export const { setNotifyModalOpen, setNotifyModalClose } = generalSlice.actions;
+export const { setIsLoading } = generalSlice.actions;
 
 export default generalSlice.reducer;

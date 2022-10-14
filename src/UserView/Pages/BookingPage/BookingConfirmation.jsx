@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { movieServ } from "../../../services/movieServ";
 import { numberWithCommas } from "../../../utils/utils";
+import { setIsLoading } from "../../redux/slices/generalSlice";
 import {
   setSelectedMovieInfo,
   setSelectedSeatList,
@@ -43,6 +44,7 @@ export default function BookingConfirmation() {
   };
 
   let handleXacNhanDatVe = () => {
+    dispatch(setIsLoading(true));
     let ticketsInfo = {
       maLichChieu: selectedMovieInfo.maLichChieu,
       danhSachVe: selectedSeatList,
@@ -50,11 +52,13 @@ export default function BookingConfirmation() {
     movieServ
       .postBookingTicket(ticketsInfo)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setIsBookingSuccessOpen(true);
+        dispatch(setIsLoading(false));
       })
       .catch((err) => {
         console.log(err);
+        dispatch(setIsLoading(false));
       });
   };
 

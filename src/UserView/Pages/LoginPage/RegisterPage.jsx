@@ -1,27 +1,33 @@
-import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import {
+  LockOutlined,
+  UserOutlined,
+  MobileOutlined,
+  NumberOutlined,
+  IdcardOutlined,
+} from "@ant-design/icons";
 import { Button, Form, Input, notification } from "antd";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { localServ } from "../../../services/localServ";
 import { userServ } from "../../../services/userServ";
 import { webColor } from "../../constants/colorConstant";
-import { setUserInfo } from "../../redux/slices/userSlice";
 import Lottie from "lottie-react";
 import lottie_flyingRocket from "../../../assets/lottie_flyingRocket.json";
 import NotifyModal from "../../../HOC/NotifyModal";
+import { useDispatch } from "react-redux";
 import { setIsLoading } from "../../redux/slices/generalSlice";
 
-const LoginPage = () => {
+const RegisterPage = () => {
   let [isNotifyModalOpen, setIsNotifyModalOpen] = useState(false);
-  let dispatch = useDispatch();
+  let [errMessage, setErrMessage] = useState(null);
   let navigate = useNavigate();
+  let dispatch = useDispatch();
 
   // Notification
   const openNotification = (type) => {
     notification[type]({
       message: (
-        <span className="font-semibold text-lg">Đăng nhập thành công</span>
+        <span className="font-semibold text-lg">Đăng ký thành công</span>
       ),
       description: "Chuyển hướng về trang chủ",
       placement: "top",
@@ -34,11 +40,9 @@ const LoginPage = () => {
     // console.log("Received values of form: ", values);
     dispatch(setIsLoading(true));
     userServ
-      .postLogin(values)
+      .postRegister(values)
       .then((res) => {
         // console.log(res);
-        dispatch(setUserInfo(res.data.content));
-        localServ.user.set(res.data.content);
         openNotification("success");
         setTimeout(() => {
           window.location.href = "/";
@@ -47,6 +51,7 @@ const LoginPage = () => {
       })
       .catch((err) => {
         console.log(err);
+        setErrMessage(err.response.data.content);
         setIsNotifyModalOpen(true);
         dispatch(setIsLoading(false));
       });
@@ -55,9 +60,11 @@ const LoginPage = () => {
   // HANDLE Notify Modal
   let handleOKClick = () => {
     setIsNotifyModalOpen(false);
+    setErrMessage(null);
   };
   let handleCancelClick = () => {
     setIsNotifyModalOpen(false);
+    setErrMessage(null);
   };
 
   // RENDER trang Login Page khi đã đăng nhập rồi
@@ -83,20 +90,20 @@ const LoginPage = () => {
   return (
     <>
       <div className="text-white" style={{ background: webColor.bgPrimary }}>
-        <div className="container mx-auto w-screen h-screen flex justify-center items-center">
+        <div className="container mx-auto h-screen flex justify-center items-center">
           {localUser ? (
             renderAlreadyLoginPage()
           ) : (
             <>
               <div className="relative w-full md:w-1/2 h-full px-10 flex justify-center items-center">
                 <p
-                  className="absolute top-10 left-0 right-0 text-center text-white text-xl sm:text-2xl md:text-3xl"
+                  className="absolute top-10 left-0 right-0 font-bold text-center text-xl sm:text-2xl md:text-3xl"
                   style={{ color: webColor.bgPrimary }}
                 >
                   Don't be afraid of the Dark
                 </p>
                 <div className="w-full">
-                  <h1 className="mb-6 text-3xl text-white">Đăng nhập</h1>
+                  <h1 className="mb-6 text-3xl text-white">Đăng ký</h1>
                   <Form
                     name="normal_login"
                     className="login-form w-full"
@@ -107,7 +114,7 @@ const LoginPage = () => {
                       rules={[
                         {
                           required: true,
-                          message: "Vui lòng nhập tài khoản!",
+                          message: "Vui lòng nhập Tài khoản!",
                         },
                       ]}
                     >
@@ -137,6 +144,69 @@ const LoginPage = () => {
                         size="large"
                       />
                     </Form.Item>
+                    <Form.Item
+                      name="email"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Vui lòng nhập email",
+                          type: "email",
+                        },
+                      ]}
+                    >
+                      <Input
+                        prefix={
+                          <UserOutlined className="site-form-item-icon" />
+                        }
+                        placeholder="Email"
+                        size="large"
+                      />
+                    </Form.Item>
+                    <Form.Item
+                      name="soDt"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Vui lòng nhập Số điện thoại",
+                        },
+                      ]}
+                    >
+                      <Input
+                        prefix={<MobileOutlined />}
+                        placeholder="Số điện thoại"
+                        size="large"
+                      />
+                    </Form.Item>
+                    <Form.Item
+                      name="maNhom"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Vui lòng nhập Mã nhóm",
+                        },
+                      ]}
+                    >
+                      <Input
+                        prefix={<NumberOutlined />}
+                        placeholder="Mã nhóm"
+                        size="large"
+                      />
+                    </Form.Item>
+                    <Form.Item
+                      name="hoTen"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Vui lòng nhập Họ và tên",
+                        },
+                      ]}
+                    >
+                      <Input
+                        prefix={<IdcardOutlined />}
+                        placeholder="Họ và tên"
+                        size="large"
+                      />
+                    </Form.Item>
                     <Form.Item>
                       <Button
                         type="danger"
@@ -148,17 +218,8 @@ const LoginPage = () => {
                           height: "initial",
                         }}
                       >
-                        Đăng nhập
+                        ĐĂNG KÝ
                       </Button>
-                      Or{" "}
-                      <NavLink to="/register">
-                        <a
-                          href=""
-                          className="text-[16px] text-red-500 hover:text-red-400"
-                        >
-                          Đăng ký
-                        </a>
-                      </NavLink>
                     </Form.Item>
                   </Form>
                 </div>
@@ -175,10 +236,10 @@ const LoginPage = () => {
         handleOKClick={handleOKClick}
         handleCancelClick={handleCancelClick}
       >
-        Tài khoản hoặc mật khẩu không đúng. Vui lòng kiểm tra lại.
+        {errMessage ? errMessage : "Đăng ký thất bại. Vui lòng thử lại sau"}
       </NotifyModal>
     </>
   );
 };
 
-export default LoginPage;
+export default RegisterPage;

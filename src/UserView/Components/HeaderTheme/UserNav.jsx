@@ -27,9 +27,9 @@ export default function UserNav() {
       return (
         <div className="flex flex-col justify-center text-center">
           <NavLink to="/login">
-            <span className="text-white text-lg">
+            <span className="text-white text-[16px] md:text-lg">
               Xin chào{" "}
-              <span className="font-bold text-xl text-red-500">
+              <span className="font-bold text-lg md:text-xl text-red-500">
                 {user.hoTen}
               </span>
             </span>
@@ -47,16 +47,24 @@ export default function UserNav() {
       );
     }
     return (
-      <>
+      <div>
         <NavLink to="/login">
           <button
             type="button"
-            className="px-5 py-2.5 bg-red-600 hover:bg-red-700 rounded-lg focus:ring-4 focus:outline-none focus:ring-red-900 font-medium text-sm text-white"
+            className="px-5 py-2.5 mr-2 bg-red-600 hover:bg-red-700 rounded-lg focus:ring-4 focus:outline-none focus:ring-red-900 font-medium text-sm text-white transition duration-300"
           >
             Đăng nhập
           </button>
         </NavLink>
-      </>
+        <NavLink to="/register">
+          <button
+            type="button"
+            className="px-5 py-2.5 bg-transparent border-2 border-red-600 hover:border-red-700 rounded-lg focus:ring-4 focus:outline-none focus:ring-red-900 font-medium text-sm text-red-600 hover:text-red-700 transition duration-300"
+          >
+            Đăng ký
+          </button>
+        </NavLink>
+      </div>
     );
   };
   return (

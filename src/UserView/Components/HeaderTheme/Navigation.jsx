@@ -14,7 +14,7 @@ const items = [
   },
   {
     label: (
-      <NavLink to="/">
+      <NavLink to="/underDeveloped">
         <span className="text-white">Food & Drinks</span>
       </NavLink>
     ),

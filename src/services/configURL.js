@@ -14,3 +14,26 @@ export const https = axios.create({
     Authorization: "Bearer " + localServ.user.get()?.accessToken,
   },
 });
+// https.interceptors.request.use(
+//   (config) => {
+//     // do something before request is sent
+//     store.dispatch(setIsLoading(true));
+//     return config;
+//   },
+//   (err) => {
+//     // do something with request error
+//     return Promise.reject(err);
+//   }
+// );
+// https.interceptors.response.use(
+//   (res) => {
+//     store.dispatch(setIsLoading(false));
+//     // do something with response data
+//     return res;
+//   },
+//   (err) => {
+//     // do something with response error
+//     store.dispatch(setIsLoading(false));
+//     return Promise.reject(err);
+//   }
+// );
