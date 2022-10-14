@@ -8,6 +8,47 @@
   box-sizing: border-box;
 }
 
+/* START HEADER */
+/* Start Navigation bar left */
+#header__nav-left.ant-menu .ant-menu-item::after {
+  border: none;
+}
+#header__nav-left.ant-menu .ant-menu-submenu::after {
+  border: none;
+}
+#header__nav-left.ant-menu
+  .ant-menu-overflow-item-rest
+  .ant-menu-submenu-title
+  .anticon {
+  color: rgba(255, 255, 255, 0.6);
+}
+#header__nav-left.ant-menu
+  .ant-menu-overflow-item-rest:hover
+  .ant-menu-submenu-title
+  .anticon {
+  color: white;
+}
+#header__nav-left.ant-menu-dark.ant-menu-horizontal > .ant-menu-item:hover {
+  background-color: transparent;
+}
+#header__nav-left.ant-menu
+  .ant-menu-item
+  .ant-menu-title-content
+  .nav-left__item {
+  color: rgba(255, 255, 255, 0.6);
+}
+#header__nav-left.ant-menu
+  .ant-menu-item:hover
+  .ant-menu-title-content
+  .nav-left__item {
+  color: white;
+}
+.ant-menu-submenu.ant-menu-submenu-popup .ant-menu-sub {
+  background-color: #170000;
+}
+/* End Navigation bar left */
+/* END HEADER */
+
 /* START HOMEPAGE */
 /* Start Banner */
 /* start overlay */

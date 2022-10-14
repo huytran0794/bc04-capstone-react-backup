@@ -51,7 +51,7 @@ export default function UserNav() {
         <NavLink to="/login">
           <button
             type="button"
-            className="px-5 py-2.5 mr-2 bg-red-600 hover:bg-red-700 rounded-lg focus:ring-4 focus:outline-none focus:ring-red-900 font-medium text-sm text-white transition duration-300"
+            className="px-2 lg:px-5 py-2.5 mr-2 bg-red-600 hover:bg-red-700 rounded-lg focus:ring-4 focus:outline-none focus:ring-red-900 font-medium text-xs lg:text-sm text-white transition duration-300"
           >
             Đăng nhập
           </button>
@@ -59,7 +59,7 @@ export default function UserNav() {
         <NavLink to="/register">
           <button
             type="button"
-            className="px-5 py-2.5 bg-transparent border-2 border-red-600 hover:border-red-700 rounded-lg focus:ring-4 focus:outline-none focus:ring-red-900 font-medium text-sm text-red-600 hover:text-red-700 transition duration-300"
+            className="px-2 lg:px-5 py-2.5 bg-transparent border-2 border-red-600 hover:border-red-700 rounded-lg focus:ring-4 focus:outline-none focus:ring-red-900 font-medium text-xs lg:text-sm text-red-600 hover:text-red-700 transition duration-300"
           >
             Đăng ký
           </button>
