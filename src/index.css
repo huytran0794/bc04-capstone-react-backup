@@ -28,6 +28,13 @@
   .anticon {
   color: white;
 }
+#header__nav-left.ant-menu.ant-menu-dark .ant-menu-item-selected,
+.ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected {
+  background-color: transparent;
+}
+.ant-menu-dark.ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item-selected {
+  background-color: transparent;
+}
 #header__nav-left.ant-menu-dark.ant-menu-horizontal > .ant-menu-item:hover {
   background-color: transparent;
 }

@@ -7,9 +7,16 @@ import { webColor } from "../../constants/colorConstant";
 const items = [
   {
     label: (
-      <NavLink className="hidden md:block hover:no-underline" to={"/"}>
-        <img className="h-16" src="/movieLogo.png" alt="web-logo" />
-      </NavLink>
+      <>
+        <NavLink className="hidden md:block hover:no-underline" to={"/"}>
+          <img className="h-16" src="/movieLogo.png" alt="web-logo" />
+        </NavLink>
+        <NavLink to="/" className="block md:hidden hover:no-underline">
+          <span className="nav-left__item align-middle text-lg md:text-xl">
+            Home
+          </span>
+        </NavLink>
+      </>
     ),
     key: "logo",
   },
