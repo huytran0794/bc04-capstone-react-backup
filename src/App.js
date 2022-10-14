@@ -13,6 +13,7 @@ import SecureView from "./HOC/SecureView";
 import LoadingScreen from "./UserView/Components/LoadingScreen/LoadingScreen";
 import RegisterPage from "./UserView/Pages/LoginPage/RegisterPage";
 import UnderDevelopedPage from "./UserView/Pages/UnderDevelopedPage/UnderDevelopedPage";
+import ProfilePage from "./UserView/Pages/Profile/ProfilePage";
 
 function App() {
   return (
@@ -57,6 +58,16 @@ function App() {
           <Route
             path="/underDeveloped"
             element={<Layout Component={UnderDevelopedPage} />}
+          />
+
+          {/* Profile page */}
+          <Route
+            path="/profile"
+            element={
+              <SecureView>
+                <Layout Component={ProfilePage} />
+              </SecureView>
+            }
           />
         </Routes>
       </BrowserRouter>
