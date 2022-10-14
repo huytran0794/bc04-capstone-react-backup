@@ -26,14 +26,14 @@ export default function UserNav() {
     if (user) {
       return (
         <div className="flex flex-col justify-center text-center">
-          <NavLink to="/login">
-            <span className="text-white text-[16px] md:text-lg">
-              Xin chào{" "}
-              <span className="font-bold text-lg md:text-xl text-red-500">
+          <span className="text-white text-[16px] md:text-lg">
+            Xin chào{" "}
+            <NavLink to="/profile" className="group inline-block ml-2">
+              <span className="font-bold text-lg md:text-xl text-red-500 group-hover:text-indigo-500 transition-all duration-700">
                 {user.hoTen}
               </span>
-            </span>
-          </NavLink>
+            </NavLink>
+          </span>
           <button
             type="button"
             className="px-4 py-1 bg-gray-800 hover:bg-gray-700 border border-gray-600 rounded-lg hover:border-gray-600 focus:ring-4 focus:ring-gray-700 focus:outline-none font-medium text-sm text-white"

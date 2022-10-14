@@ -9,4 +9,14 @@ export const userServ = {
     let uri = `/api/QuanLyNguoiDung/DangKy`;
     return https.post(uri, dataRegister);
   },
+
+  getUserProfile: () => {
+    let uri = `/api/QuanLyNguoiDung/ThongTinTaiKhoan`;
+    return https.post(uri);
+  },
+
+  updateUserProfile: (dataUserProfile) => {
+    let uri = `/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung`;
+    return https.put(uri, dataUserProfile);
+  },
 };

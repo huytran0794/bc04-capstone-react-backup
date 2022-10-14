@@ -196,3 +196,52 @@
 }
 /* End Showtime Date List */
 /* END BOOKINGPAGE */
+
+
+
+/* tabs in profile page */
+.profile .ant-tabs-ink-bar {
+  background: #9CA7CB!important;
+  height:5px!important;
+  border-radius: 10px!important;
+}
+
+.profile .ant-tabs > .ant-tabs-nav .ant-tabs-nav-wrap, .profile .ant-tabs > div > .ant-tabs-nav .ant-tabs-nav-wrap {
+  border-bottom: 1.5px solid #28324A!important;
+}
+
+.profile .ant-tabs-tab-btn {
+  color: white!important;
+  font-size: 25px;
+}
+
+/* tabs in profile page */
+
+/* booking history table */
+.bookingHistoryTable .ant-table-thead th.ant-table-cell {
+  font-size: 18px;
+  font-weight: bold;
+  color: #28324A;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.bookingHistoryTable .ant-pagination li:not(:last-child) {
+  margin-right: 15px;
+}
+
+.bookingHistoryTable .ant-pagination li {
+  background-color: #fff!important;
+}
+
+.bookingHistoryTable .ant-pagination li button.ant-pagination-item-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bookingHistoryTable .ant-pagination-item {
+  /* background-color: #fff!important; */
+  color: #28324A;
+}
+/* booking history table */
