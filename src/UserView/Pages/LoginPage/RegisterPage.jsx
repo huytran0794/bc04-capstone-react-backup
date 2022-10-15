@@ -133,6 +133,10 @@ const RegisterPage = () => {
                           required: true,
                           message: "Vui lòng nhập Mật khẩu",
                         },
+                        {
+                          min: 6,
+                          message: "Vui lòng nhập mật khẩu dài hơn 5 ký tự",
+                        },
                       ]}
                     >
                       <Input
@@ -145,12 +149,47 @@ const RegisterPage = () => {
                       />
                     </Form.Item>
                     <Form.Item
+                      name="reMatKhau"
+                      dependencies={["matKhau"]}
+                      rules={[
+                        {
+                          required: true,
+                          message: "Vui lòng nhập Xác nhận mật khẩu",
+                        },
+                        ({ getFieldValue }) => ({
+                          validator(_, value) {
+                            if (!value || getFieldValue("matKhau") === value) {
+                              return Promise.resolve();
+                            }
+                            return Promise.reject(
+                              new Error(
+                                "Xác nhận mật khẩu và mât khẩu băt buộc phải giống nhau"
+                              )
+                            );
+                          },
+                        }),
+                      ]}
+                    >
+                      <Input
+                        prefix={
+                          <LockOutlined className="site-form-item-icon" />
+                        }
+                        type="password"
+                        placeholder="Vui lòng nhập xác nhận mật khẩu..."
+                        size="large"
+                      />
+                    </Form.Item>
+                    <Form.Item
                       name="email"
                       rules={[
                         {
                           required: true,
                           message: "Vui lòng nhập email",
+                        },
+                        {
                           type: "email",
+                          message:
+                            "Vui lòng nhập email đúng định dạng Johndoe@email.com",
                         },
                       ]}
                     >
@@ -158,7 +197,7 @@ const RegisterPage = () => {
                         prefix={
                           <UserOutlined className="site-form-item-icon" />
                         }
-                        placeholder="Email"
+                        placeholder="Johndoe@email.com"
                         size="large"
                       />
                     </Form.Item>
@@ -168,6 +207,10 @@ const RegisterPage = () => {
                         {
                           required: true,
                           message: "Vui lòng nhập Số điện thoại",
+                        },
+                        {
+                          pattern: /^(?:\d*)$/,
+                          message: "Số điện thoại không được phép có ký tự lạ",
                         },
                       ]}
                     >
@@ -198,6 +241,10 @@ const RegisterPage = () => {
                         {
                           required: true,
                           message: "Vui lòng nhập Họ và tên",
+                        },
+                        {
+                          pattern: /^[A-Za-z\s]*$/i,
+                          message: "Họ và tên chỉ được phép nhập các chữ cái",
                         },
                       ]}
                     >
