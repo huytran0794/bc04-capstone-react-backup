@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 
 import TabProfile from "./TabProfile/TabProfile";
 import TabBookingHistory from "./TabBookingHistory/TabBookingHistory";
-import SectionWrapper from "./SectionWrapper";
+import SectionWrapper from "../../Components/Global/SectionWrapper/SectionWrapper";
 import { userServ } from "../../../services/userServ";
 import { useDispatch } from "react-redux";
 import { setIsLoading } from "../../redux/slices/generalSlice";
@@ -42,13 +42,6 @@ export default function ProfilePage() {
         },
       ];
       return <Tabs defaultActiveKey="1" items={items} />;
-    } else {
-      return (
-        <div className="text-red-600 text-center text-lg">
-          {" "}
-          You are not allowed to be here
-        </div>
-      );
     }
   };
 
